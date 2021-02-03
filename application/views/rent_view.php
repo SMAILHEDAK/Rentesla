@@ -10,14 +10,15 @@
     <!------ Include the above in your HEAD tag ---------->
 
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/style.css">
 
     <title>Rentesla</title>
 </head>
 
 <body class="p-0 m-0" style="width:100%; height:100%;">
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <nav class="navbar navbar-expand-sm navbar-light">
         <!-- Brand -->
-        <a class="navbar-brand" href="#">Rentesla</a>
+        <a class="navbar-brand" href="#"><img class="logo" src="../../img/logo.png" alt="logo"></a>
 
         <!-- Links -->
         <ul class="navbar-nav">
@@ -30,7 +31,11 @@
                     Menu
                 </a>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#"><?php echo anchor('profile', 'Accéder à votre profil', 'class="link-class"') ?></a>
+                    <a class="dropdown-item" href="#"><?php if ($_SESSION['admin'] == '1') {
+                                                            echo anchor('logged_admin', 'Votre profil', 'class="link-class"');
+                                                        } else {
+                                                            echo anchor('profile', 'Votre profil', 'class="link-class"');
+                                                        } ?></a>
                     <a class="dropdown-item" href="#">
                         <?php echo anchor('main/logout', 'Se déconnecter', 'class="link-class"') ?></a>
                 </div>
@@ -41,11 +46,21 @@
         <p class="h1">Tesla <?= $cardata['0']['model'] ?></p>
     </div>
     <!-- Temporary image -->
-    <div class="container d-flex justify-content-center"><img src="../../img/roadster.png" alt="picture" class="img-fluid"></img></div>
-    <div class="container d-flex justify-content-start">
+    <div class="container d-flex justify-content-center"><img src="<?php if ($cardata['0']['model'] == 'Model Y') {
+                                                                        echo '../../img/modely.png';
+                                                                    } else if ($cardata['0']['model'] == 'Model X') {
+                                                                        echo '../../img/modelx.png';
+                                                                    } else if ($cardata['0']['model'] == 'Model S') {
+                                                                        echo '../../img/models.png';
+                                                                    } else if ($cardata['0']['model'] == 'Model 3') {
+                                                                        echo '../../img/model3.png';
+                                                                    } else if ($cardata['0']['model'] == 'Roadster') {
+                                                                        echo '../../img/roadster.png';
+                                                                    } ?>" alt="<?= $cardata['0']['model'] ?>" class="img-fluid"></img></div>
+    <div class="container-fluid d-flex justify-content-start">
         <p class="h4">Informations sur le véhicule :</p>
     </div>
-    <div class="container d-flex justify-content-start">
+    <div class="container-fluid">
         <ul class="list-group list-group-flush">
             <li class="list-group-item">Puissance/Batterie : <?= $cardata['0']['power'] ?> / <?= $cardata['0']['batterysize'] ?></li>
             <li class="list-group-item">Couleur : <?= $cardata['0']['color'] ?></li>
@@ -59,11 +74,11 @@
         </ul>
     </div>
 
-    <div class="container d-flex justify-content-center">
+    <div class="container-fluid d-flex justify-content-start pt-5">
         <p class="h5">Description du modèle :</p>
     </div>
 
-    <div class="container d-flex justify-content-center">
+    <div class="container-fluid d-flex justify-content-start">
         <p><?php if ($cardata['0']['model'] == "Model Y") {
                 echo 'La Tesla Model Y est un suv urbain électrique qui vous permettra de braver les rues encombrées en un rien de temps. 
                 Tout cela, dans un confort de route exceptionnel. 
@@ -96,97 +111,94 @@
                 N\'hésitez pas et sautez sur l\'occasion!';
             } ?></p>
     </div>
+    <div class="container-fluid pb-2 pt-5">
+        <p class="h3" style="width:auto;">Non disponible à ces dates :</p>
 
-    <div class="container d-flex justify-content-center">
-        <p class="h5">Louer ce véhicule :</p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Date de début</th>
+                    <th scope="col">Date de fin</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($rentals as $rentals) { ?>
+                    <tr>
+                        <td><?= $rentals['start_date'] ?></td>
+                        <td><?= $rentals['end_date'] ?></td>
+                    </tr>
+                <?php } ?>
+            </tbody>
+        </table>
     </div>
+    <div class="container-fluid d-flex justify-content-center pt-5">
+        <p class="h2">Louer ce véhicule :</p>
+    </div>
+    <div class="container-fluid justify-content-center pb-2">
+        <form action="" class="container-fluid justify-content-center" method="post">
+            <div class="form-group row p-1">
+                <div class="col">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                        </div>
+                        <input id="start_date" name="start_date" placeholder="Date de début" type="date" class="form-control" aria-describedby="start_dateHelpBlock">
+                    </div>
+                    <span id="start_dateHelpBlock" class="form-text text-muted">Selectionnez votre date de début</span>
+                </div>
+            </div>
 
-    <div class="container d-flex justify-content-center">
-        <div class='row'>
-            <div class='col'>
-                <form action="" method="post">
-                    <div class="form-group row">
-                        <div class="col-8">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <div class="input-group-text">
-                                        <i class="fa fa-clock-o"></i>
-                                    </div>
-                                </div>
-                                <input id="start_date" name="start_date" placeholder="Date de début" type="date" class="form-control" aria-describedby="start_dateHelpBlock">
-                            </div>
-                            <span id="start_dateHelpBlock" class="form-text text-muted">Selectionnez votre date de début</span>
+            <div class="form-group row p-1">
+                <div class="col">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
                         </div>
+                        <input id="end_date" name="end_date" placeholder="Date de fin" type="date" class="form-control" aria-describedby="end_dateHelpBlock">
                     </div>
-
-                    <div class="form-group row">
-                        <div class="col-8">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <div class="input-group-text">
-                                        <i class="fa fa-clock-o"></i>
-                                    </div>
-                                </div>
-                                <input id="end_date" name="end_date" placeholder="Date de fin" type="date" class="form-control" aria-describedby="end_dateHelpBlock">
-                            </div>
-                            <span id="end_dateHelpBlock" class="form-text text-muted">Selectionnez votre date de fin</span>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-8">
-                            <select name="cards" id="cards" class="custom-select">
-                                <?php foreach ($cards as $cards) { ?>
-                                    <option value="<?= $cards['id_card'] ?>">Bénéficiaire de la carte :<?= $cards['card_holder'] ?> <br> Numéro de carte : <?= $cards['card_number'] ?></option>
-                                <?php } ?>
-                            </select>
-                            <span id="bankHelpBlock" class="form-text text-muted">Sélectionnez la carte bancaire à utiliser</span>
-                        </div>
-                    </div>
-                    <?php if ($cardata['0']['autopilot'] == 1) {
-                        echo "<div class='form-group row'>
-                    <div class='col-8'><select class='custom-select' name='auto'>
+                    <span id="end_dateHelpBlock" class="form-text text-muted">Selectionnez votre date de fin</span>
+                </div>
+            </div>
+            <div class="form-group row p-1">
+                <div class="col">
+                    <select name="cards" id="cards" class="custom-select">
+                        <?php foreach ($cards as $cards) { ?>
+                            <option value="<?= $cards['id_card'] ?>">Bénéficiaire de la carte :<?= $cards['card_holder'] ?> <br> Numéro de carte : <?= $cards['card_number'] ?></option>
+                        <?php } ?>
+                    </select>
+                    <span id="bankHelpBlock" class="form-text text-muted">Sélectionnez la carte bancaire à utiliser</span>
+                </div>
+            </div>
+            <?php if ($cardata['0']['autopilot'] == 1) {
+                echo "<div class='form-group row p-2'>
+                    <div class='col'><select class='custom-select' name='auto'>
                         <option disabled selected>Choisir</option>
                         <option value='1'>Oui</option>
                         <option value='0'>Non</option>
                     </select>  <span id='autoHelpBlock' class='form-text text-muted'>Voulez vous vous faire livrer par autopilot ? Une surfacture de 150 euros s'effectuera.</span>
                     </div>
                     </div>";
-                    } ?>
-                    <p class="text-muted">Si vous n'avez aucune carte d'enregistrée, vous pouvez<?php echo anchor('add_card', 'Ajouter une carte', 'class="btn"') ?>.</p>
+            } ?>
+            <p class="text-muted">Si vous n'avez aucune carte d'enregistrée, vous pouvez <?php echo anchor('add_card', 'Ajouter une carte') ?>.</p>
 
-                    <div class="form-group row">
-                        <div class="col-8">
-                            <input name="submit" type="submit" value="Louer le véhicule" class="btn btn-primary"></input>
+            <div class="form-group row p-1">
+                <div class="col">
+                    <input name="submit" type="submit" value="Louer le véhicule" class="btn"></input>
+                </div>
+            </div>
+        </form>
+    </div>
+    <footer>
+        <div class="footer-area-bottom" style="height:20%;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="copyright text-center">
+                            <p>
+                                &copy; <strong><a href="legalmentions">Mentions </a></strong> | <strong><a href="legalmentions">RENTESLA Ltd. </a></strong> | <strong><a href="#">Contact </a></strong>
+                            </p>
                         </div>
                     </div>
-                </form>
+                </div>
             </div>
-            <div class='col-6'>
-                <p class="h3">Dates non disponibles :</p>
-
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">Date de début</th>
-                            <th scope="col">Date de fin</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($rentals as $rentals) { ?>
-                            <tr>
-                                <td><?= $rentals['start_date'] ?></td>
-                                <td><?= $rentals['end_date'] ?></td>
-                            </tr>
-                        <?php } ?>
-                    </tbody>
-                </table>
-                <?php}?>
-            </div>
-        </div>
-    </div>
-    <footer class="py-4 bg-dark flex-shrink-0">
-        <div class="container text-center">
-            <a href="https://bootstrapious.com/snippets" class="text-muted">Bootstrap snippet by Bootstrapious</a>
         </div>
     </footer>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

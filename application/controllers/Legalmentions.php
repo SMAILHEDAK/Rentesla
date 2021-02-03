@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Logged_main extends CI_Controller
+class Legalmentions extends CI_Controller
 {
 
 	/**
@@ -19,19 +19,9 @@ class Logged_main extends CI_Controller
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
-	public function logged()
+	public function legal()
 	{
-		$this->load->helper(array('form', 'url'));
-		$this->load->library('form_validation');
-        $this->load->helper('cookie');
-		$this->load->model("logged_main_model");
-		$autopilot = $this->input->post("auto");
-		if ($this->input->post('submit')) {
-			$cars['cars'] = $this->logged_main_model->get_autopilot($autopilot);
-			$this->load->view('logged_main', $cars);
-		} else {
-			$cars['cars'] = $this->logged_main_model->get_all_cars();
-			$this->load->view('logged_main', $cars);
-		}
-	}
+			$this->load->view('legalmentions');
+
+    }
 }

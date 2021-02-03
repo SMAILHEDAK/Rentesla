@@ -10,14 +10,14 @@
     <!------ Include the above in your HEAD tag ---------->
 
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-
+    <link rel="stylesheet" href="../../css/style.css">
     <title>Rentesla</title>
 </head>
 
 <body class="p-0 m-0" style="height:100% ;width:100%;">
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+<nav class="navbar navbar-expand-sm navbar-light">
         <!-- Brand -->
-        <a class="navbar-brand" href="#">Rentesla</a>
+        <a class="navbar-brand" href="#"><img class="logo" src="../../img/logo.png" alt="logo"></a>
 
         <!-- Links -->
         <ul class="navbar-nav">
@@ -31,9 +31,9 @@
                 </a>
                 <div class="dropdown-menu">
                     <a class="dropdown-item" href="#"><?php if ($_SESSION['admin'] == '1') {
-                                                            echo anchor('logged_admin', 'Accéder à votre profil', 'class="link-class"');
+                                                            echo anchor('logged_admin', 'Votre profil', 'class="link-class"');
                                                         } else {
-                                                            echo anchor('profile', 'Accéder à votre profil', 'class="link-class"');
+                                                            echo anchor('profile', 'Votre profil', 'class="link-class"');
                                                         } ?></a>
                     <a class="dropdown-item" href="#">
                         <?php echo anchor('main/logout', 'Se déconnecter', 'class="link-class"') ?></a>
@@ -41,9 +41,12 @@
             </li>
         </ul>
     </nav>
-    <div class="container-fluid">
-        <p class="h1 text-center">Gérez vos clients :</p>
-        <table class="table table-responsive">
+    <div class="container-fluid mb-5">
+    <p class="h1 text-center">Bonjour ADMIN :</p>
+    </div>
+    <div class="container-fluid mb-5">
+        <p class="h1 text-start">Gérez vos clients :</p>
+        <table class="table mx-auto">
             <thead>
                 <tr>
                     <th scope="col">Nom</th>
@@ -55,6 +58,7 @@
                     <th scope="col">Login</th>
                     <th scope="col">Password</th>
                     <th scope="col">Suppression</th>
+                    <th scope="col">Modification</th>
                 </tr>
             </thead>
             <tbody>
@@ -69,18 +73,19 @@
                         <td><?= $row['login'] ?></td>
                         <td><?= $row['password'] ?></td>
                         <td><?php echo anchor('logged_admin/deleteuser/' . $row["id_user"], 'Supprimer') ?></td>
+                        <td><?php echo anchor('modifyuser/' . $row["id_user"], 'Modifier') ?></td>
                     </tr>
                 <?php } ?>
             </tbody>
         </table>
     </div>
-    <div class="container-fluid mb-4"></div>
-            <div class="text-center">
-                <p class="h1 text-center">Gérez vos locations :</p>
-            </div>
+           
 
-            <div class="container-fluid">
-                <table class="table table-responsive">
+            <div class="container-fluid mb-5">
+            <div class="text-start">
+                <p class="h1">Gérez vos locations :</p>
+            </div>
+                <table class="table mx-auto">
                     <thead>
                         <tr>
                             <th scope="col">Date de début</th>
@@ -106,14 +111,14 @@
                 </table>
             </div>
    
-            <div class="container-fluid mb-4"></div>
-            <div class="text-center">
-                <p class="h1 text-center">Gérez vos voitures :</p>
+           
+
+            <div class="container-fluid mb-5">
+            <div class="text-start">
+                <p class="h1">Gérez vos voitures :</p>
                 <?php echo anchor('addcar', 'Ajouter un véhicule?') ?>
             </div>
-
-            <div class="container-fluid">
-                <table class="table table-responsive">
+                <table class="table mx-auto">
                     <thead>
                         <tr>
                             <th scope="col">Modèle</th>
@@ -149,11 +154,21 @@
             </div>
 
 
-    <footer class="py-4 bg-dark flex-shrink-0">
-        <div class="container text-center">
-            <a href="https://bootstrapious.com/snippets" class="text-muted">Bootstrap snippet by Bootstrapious</a>
-        </div>
-    </footer>
+            <footer>
+            <div class="footer-area-bottom" style="height:20%;">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="copyright text-center">
+                                <p>
+                                    &copy; <strong><a href="legalmentions">Mentions </a></strong> | <strong><a href="#">RENTESLA Ltd. </a></strong> | <strong><a href="#">Contact </a></strong>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>

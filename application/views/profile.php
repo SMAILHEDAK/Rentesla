@@ -10,6 +10,7 @@
     <!------ Include the above in your HEAD tag ---------->
 
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/style.css">
     <script>
         var edit = true;
 
@@ -31,9 +32,9 @@
 </head>
 
 <body class="p-0 m-0" style="width:100%; height:100%;">
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <nav class="navbar navbar-expand-sm navbar-light">
         <!-- Brand -->
-        <a class="navbar-brand" href="#">Rentesla</a>
+        <a class="navbar-brand" href="#"><img class="logo" src="../../img/logo.png" alt="logo"></a>
 
         <!-- Links -->
         <ul class="navbar-nav">
@@ -46,47 +47,60 @@
                     Menu
                 </a>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#"><?php echo anchor('profile', 'Accéder à votre profil', 'class="link-class"') ?></a>
+                    <a class="dropdown-item" href="#"><?php if ($_SESSION['admin'] == '1') {
+                                                            echo anchor('logged_admin', 'Votre profil', 'class="link-class"');
+                                                        } else {
+                                                            echo anchor('profile', 'Votre profil', 'class="link-class"');
+                                                        } ?></a>
                     <a class="dropdown-item" href="#">
                         <?php echo anchor('main/logout', 'Se déconnecter', 'class="link-class"') ?></a>
                 </div>
             </li>
         </ul>
     </nav>
+
     <div class="container d-flex justify-content-center">
         <p class="h1">Bonjour <?= $_SESSION['login'] ?> :</p>
     </div>
 
-    <div class="container d-flex justify-content-start">
+    <div class="container-fluid d-flex justify-content-center">
         <form action="" method="post" id="userdata" name="userdata">
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">Votre nom : <input type="text" name="name" value="<?= $_SESSION['name'] ?>" id="name" readonly="readonly" class="readonlyinput" /> </li>
-                <p><?php echo form_error('name'); ?></p>
-                <li class="list-group-item">Votre prénom: <input type="text" name="surname" value="<?= $_SESSION['surname'] ?>" id="surname" readonly="readonly" class="readonlyinput" /> </li>
-                <p><?php echo form_error('surname'); ?></p>
-                <li class="list-group-item">Votre addresse : <input type="text" name="address" value="<?= $_SESSION['address'] ?>" id="address" readonly="readonly" class="readonlyinput" /> </li>
-                <p><?php echo form_error('address'); ?></p>
-                <li class="list-group-item">Votre date de naissance : <input type="date" name="birthdate" value="<?= $_SESSION['birthdate'] ?>" id="birthdate" readonly="readonly" class="readonlyinput" /> </li>
-                <p><?php echo form_error('birthdate'); ?></p>
-                <li class="list-group-item">Votre date de permis : <input type="date" name="licensedate" value="<?= $_SESSION['licensedate'] ?>" id="licensedate" readonly="readonly" class="readonlyinput" /> </li>
-                <p><?php echo form_error('licensedate'); ?></p>
-                <li class="list-group-item">Votre addresse mail : <input type="email" name="mail" value="<?= $_SESSION['mail'] ?>" id="mail" readonly="readonly" class="readonlyinput" /> </li>
-                <p><?php echo form_error('mail'); ?></p>
-                <li class="list-group-item">Votre mot de passe : <input type="password" name="password" value="<?= $_SESSION['password'] ?>" id="password" class="readonlyinput" />
-                    <input type="checkbox" onclick="showPass()">Afficher le mot de passe
-                </li>
-                <p><?php echo form_error('password'); ?></p>
-            </ul>
+            <span class="form-text text-muted"> Votre nom :</span>
+            <input type="text" class="form-control" name="name" value="<?= $_SESSION['name'] ?>" id="name" readonly="readonly" class="readonlyinput" />
+            <p><?php echo form_error('name'); ?></p>
+            <span class="form-text text-muted"> Votre prénom :</span>
+            <input type="text" class="form-control" name="surname" value="<?= $_SESSION['surname'] ?>" id="surname" readonly="readonly" class="readonlyinput" />
+            <p><?php echo form_error('surname'); ?></p>
+            <span class="form-text text-muted"> Votre addresse :</span>
+            <input type="text" class="form-control" name="address" value="<?= $_SESSION['address'] ?>" id="address" readonly="readonly" class="readonlyinput" />
+            <p><?php echo form_error('address'); ?></p>
+            <span class="form-text text-muted"> Votre date de naissance :</span>
+            <input type="date" class="form-control" name="birthdate" value="<?= $_SESSION['birthdate'] ?>" id="birthdate" readonly="readonly" class="readonlyinput" />
+            <p><?php echo form_error('birthdate'); ?></p>
+            <span class="form-text text-muted"> Votre date de permis :</span>
+            <input type="date" class="form-control" name="licensedate" value="<?= $_SESSION['licensedate'] ?>" id="licensedate" readonly="readonly" class="readonlyinput" />
+            <p><?php echo form_error('licensedate'); ?></p>
+            <span class="form-text text-muted"> Votre addresse mail:</span>
+            <input type="email" class="form-control" name="mail" value="<?= $_SESSION['mail'] ?>" id="mail" readonly="readonly" class="readonlyinput" />
+            <p><?php echo form_error('mail'); ?></p>
+            <span class="form-text text-muted"> Votre mot de passe :</span>
+            <input type="password" class="form-control" name="password" value="<?= $_SESSION['password'] ?>" id="password" class="readonlyinput" />
+            <input type="checkbox" onclick="showPass()">Afficher le mot de passe
+            <p><?php echo form_error('password'); ?></p>
 
 
     </div>
-    <div class="container d-flex justify-content-start">
-        <button class="btn" name="datasubmit" id="datasubmit" type="submit">sauvegarder</button>
+    <div class="container-fluid d-flex justify-content-center">
+        <button class="btn m-2" name="datasubmit" id="datasubmit" type="submit">sauvegarder</button>
         </form>
-        <input type="submit" class="btn" title="Edit" value="Modifier mes informations" onclick="inputToggle(event)" />
     </div>
-    <p class='h1'>Vos cartes bancaires :</p>
-    <div class="container">
+    <div class="container-fluid d-flex justify-content-center">
+        <button type="submit" class="btn m-2" title="Edit" onclick="inputToggle(event)" />modifier mes infos</button>
+    </div>
+    <div class="container-fluid d-flex justify-content-center p-5">
+        <p class='h1'>Vos cartes bancaires :</p>
+    </div>
+    <div class="container-fluid d-flex justify-content-center">
         <ul class="list-group list-group-flush">
             <?php foreach ($cards as $cards) { ?>
                 <li class="list-group-item">Bénéficiaire de la carte : <?= $cards['card_holder'] ?></li>
@@ -95,61 +109,79 @@
             <?php } ?>
         </ul>
     </div>
-    <div class="container d-flex justify-content-start">
-        <p class="h4">Ajouter une carte ?</p>
-        <?php echo anchor('add_card', 'Ajouter une carte', 'class="btn"') ?>
+    <div class="container-fluid d-flex justify-content-center">
+        <?php echo anchor('add_card', 'Ajouter une carte?', 'class="btn"') ?>
+    </div>
+    <div class="container-fluid d-flex justify-content-center p-5">
+        <p class='h1'>Vos Locations en cours :</p>
     </div>
 
-    <p class='h1'>Vos Locations en cours :</p>
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">Modèle</th>
-                <th scope="col">Date de début</th>
-                <th scope="col">Date de fin</th>
-                <th scope="col">Annuler la location</th>
-                <th scope="col">Retourner le véhicule</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($currentrental as $row) { ?>
+
+    <div class="container-fluid">
+        <table class="table mx-auto">
+            <thead>
                 <tr>
-                    <th scope="row"><?= $row['model'] ?></th>
-                    <td><?= $row['start_date'] ?></td>
-                    <td><?= $row['end_date'] ?></td>
-                    <td><?php echo anchor('profile/' . $row["car_id"], 'Annuler') ?></td>
-                    <td><?php echo anchor('profile/return/' . $row["car_id"], 'Retour du véhicule') ?></td>
+                    <th scope="col">Modèle</th>
+                    <th scope="col">Début</th>
+                    <th scope="col">Fin</th>
+                    <th scope="col">Annuler</th>
+                    <th scope="col">Rendre</th>
                 </tr>
-            <?php } ?>
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                <?php foreach ($currentrental as $row) { ?>
+                    <tr>
+                        <th scope="row"><?= $row['model'] ?></th>
+                        <td><?= $row['start_date'] ?></td>
+                        <td><?= $row['end_date'] ?></td>
+                        <td><?php echo anchor('profile/' . $row["car_id"], 'Annuler') ?></td>
+                        <td><?php echo anchor('profile/return/' . $row["car_id"], 'Retour du véhicule') ?></td>
+                    </tr>
+                <?php } ?>
+            </tbody>
+        </table>
+    </div>
 
-    <p class='h1'>Vos Locations Terminées :</p>
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">Modèle</th>
-                <th scope="col">Date de début</th>
-                <th scope="col">Date de fin</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($pastrental as $row) { ?>
+
+    <div class="container-fluid d-flex justify-content-center p-5">
+        <p class='h1'>Vos Locations Terminées :</p>
+    </div>
+    <div class="container-fluid pb-5">
+        <table class="table mx-auto">
+            <thead>
                 <tr>
-                    <th scope="row"><?= $row['model'] ?></th>
-                    <td><?= $row['start_date'] ?></td>
-                    <td><?= $row['end_date'] ?></td>
+                    <th scope="col">Modèle</th>
+                    <th scope="col">Date de début</th>
+                    <th scope="col">Date de fin</th>
                 </tr>
-            <?php } ?>
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                <?php foreach ($pastrental as $row) { ?>
+                    <tr>
+                        <th scope="row"><?= $row['model'] ?></th>
+                        <td><?= $row['start_date'] ?></td>
+                        <td><?= $row['end_date'] ?></td>
+                    </tr>
+                <?php } ?>
+            </tbody>
+        </table>
+    </div>
 
-
-    <footer class="py-4 bg-dark flex-shrink-0">
-        <div class="container text-center">
-            <a href="https://bootstrapious.com/snippets" class="text-muted">Bootstrap snippet by Bootstrapious</a>
-        </div>
-    </footer>
+    <footer>
+            <div class="footer-area-bottom" style="height:20%;">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="copyright text-center">
+                                <p>
+                                    &copy; <strong><a href="legalmentions">Mentions </a></strong> | <strong><a href="legalmentions">RENTESLA Ltd. </a></strong> | <strong><a href="#">Contact </a></strong>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>

@@ -66,7 +66,11 @@ $route ['logged_admin/deleteuser/(:any)'] ='logged_admin/deleteuser/$id';
 $route ['logged_admin/deletecar/(:any)'] ='logged_admin/deletecar/$id';
 $route ['logged_admin/deleterent/(:any)'] ='logged_admin/deleterent/$id';
 $route ['modifycar/(:any)'] = 'modifycar/modify/$id';
+$route ['modifyuser/(:any)'] = 'modifyuser/modify/$id';
+$route ['legalmentions'] ='legalmentions/legal';
 $route ['addcar'] ='addcar/add';
+$route ['setthemeday'] ='theme/setthemeday';
+
 
 
 

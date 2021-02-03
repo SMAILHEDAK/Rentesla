@@ -45,6 +45,8 @@ class Rent_model extends CI_Model
         $this->db->where('car_id', $car_id);
         $this->db->where("'$from_date' BETWEEN start_date AND end_date");
         $this->db->where("'$to_date' BETWEEN start_date AND end_date");
+        $this->db->where("start_date BETWEEN '$from_date' AND '$to_date'");
+        $this->db->where("end_date BETWEEN '$from_date' AND '$to_date'");
         $query = $this->db->get();
         return $query->result_array();;
     }

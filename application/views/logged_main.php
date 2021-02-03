@@ -10,14 +10,14 @@
     <!------ Include the above in your HEAD tag ---------->
 
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-
+    <link rel="stylesheet" href="../../css/style.css">
     <title>Rentesla</title>
 </head>
 
-<body>
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+<body onload="loadtheme()">
+    <nav class="navbar navbar-expand-sm navbar-light">
         <!-- Brand -->
-        <a class="navbar-brand" href="#">Rentesla</a>
+        <a class="navbar-brand" href="#"><img class="logo" src="../../img/logo.png" alt="logo"></a>
 
         <!-- Links -->
         <ul class="navbar-nav">
@@ -30,37 +30,36 @@
                     Menu
                 </a>
                 <div class="dropdown-menu">
-                <a class="dropdown-item" href="#"><?php if ($_SESSION['admin']=='1'){echo anchor('logged_admin', 'Accéder à votre profil', 'class="link-class"');} else{echo anchor('profile', 'Accéder à votre profil', 'class="link-class"');} ?></a>
+                    <a class="dropdown-item" href="#"><?php if ($_SESSION['admin'] == '1') {
+                                                            echo anchor('logged_admin', 'Votre profil', 'class="link-class"');
+                                                        } else {
+                                                            echo anchor('profile', 'Votre profil', 'class="link-class"');
+                                                        } ?></a>
                     <a class="dropdown-item" href="#">
                         <?php echo anchor('main/logout', 'Se déconnecter', 'class="link-class"') ?></a>
                 </div>
             </li>
         </ul>
     </nav>
-    <header class="container-fluid p-0 m-0">
-        <img src="../../img/hero1.jpg" class="img-fluid" alt="Responsive image">
-    </header>
+
     <section class="container">
         <h1>Nos Tesla disponibles :</h1>
         <div class="input-group container d-flex align-items-center">
             <form action="" method="post">
                 <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <label class="input-group-text" for="autopilot">Autopilot</label>
-                    </div>
                     <select class="custom-select" name="auto">
-                        <option disabled selected>Choisir</option>
+                        <option disabled selected>Autopilot</option>
                         <option value="1">Oui</option>
                         <option value="0">Non</option>
                     </select>
                 </div>
-                <button type="submit" name="submit" value="submit" class="btn btn-outline-primary">rechercher</button>
+                <button type="submit" name="submit" value="submit" class="btn">rechercher</button>
         </div>
         </form>
     </section>
-    <section class="container">
+    <section class="container-fluid col-md-6">
         <?php foreach ($cars as $row) { ?>
-            <div class="col-sm-6">
+            <div class="row p-4">
                 <div class="card">
                     <div class="card-header"><?= $row['model'] ?></div>
                     <div class="card-body">
@@ -98,7 +97,7 @@
                             <?= $row['kilometer'] ?> kilomètres <br>
                             <?= $row['color'] ?><br>
                         </p>
-                        <a href="rent/<?= $row['car_id']?>" class="btn btn-primary">Plus d'infos!</a>
+                        <a href="rent/<?= $row['car_id'] ?>" class="btn">Plus d'infos!</a>
                         <p class="text-right"><?= $row['dailyprice'] ?> euros/jour</p>
 
 
@@ -108,25 +107,29 @@
             </div>
         <?php } ?>
 
-        <section class="container">
+        <section class="container-fluid text-center pt-5 pb-5">
             <div class="">
-                <p class="h1"> Retrouvez nous dans notre agence :</p>
-                <p class="text-center">Vous pouvez nous retrouver dans notre agence située sur cette carte</p>
+                <p class="h1 p-2"> Notre agence :</p>
+                <p class="text-center p-2">Vous pouvez nous retrouver dans notre agence située sur cette carte :</p>
             </div>
-            <div> map </div>
+            <div class="container-fluid align-items-center p-2">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1640.9499270287397!2d135.57471265812254!3d34.65723199511139!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6000dfbb3fc57d23%3A0x3b91f34282a3018!2sRandom!5e0!3m2!1sfr!2sfr!4v1615816492300!5m2!1sfr!2sfr" width="auto" height="auto" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
         </section>
 
-        <section class="container">
-            <div>
-                <p class="h1"> N'oubliez pas notre partenaire :</p>
-                <p class="text-center">Lorem ipsum blablablablablabl</p>
-            </div>
-            <div class="container text-center"><a href="">Louer une mercedes!</a></div>
-        </section>
-
-        <footer class="py-4 bg-dark flex-shrink-0">
-            <div class="container text-center">
-                <a href="https://bootstrapious.com/snippets" class="text-muted">Bootstrap snippet by Bootstrapious</a>
+        <footer>
+            <div class="footer-area-bottom" style="height:20%;">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="copyright text-center">
+                                <p>
+                                    &copy; <strong><a href="legalmentions">Mentions </a></strong> | <strong><a href="#">RENTESLA Ltd. </a></strong> | <strong><a href="#">Contact </a></strong>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </footer>
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

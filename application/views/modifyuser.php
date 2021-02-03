@@ -6,11 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <link rel="stylesheet" href="../../css/style.css">
 
     <!------ Include the above in your HEAD tag ---------->
 
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/style.css">
 
     <title>Rentesla</title>
 </head>
@@ -44,58 +44,48 @@
     </nav>
 
     <div class="container d-flex justify-content-center">
-            <p class="h1">Ajout d'un véhicule :</p>
+        <?php foreach ($user as $row) { ?>
+            <p class="h1">Modification du client numéro <?= $row['id_user'] ?> :</p>
     </div>
 
     <div class="container d-flex justify-content-center">
         <form action="" method="post" id="userdata" name="userdata">
-
-            <span class="form-text text-muted">Le modèle :</span> <input type="text" name="model"  id="model"   />
-            <p><?php echo form_error('model'); ?></p>
-
-            <span class="form-text text-muted">La puissance :</span> <input type="text" name="power"  id="power"   />
-            <p><?php echo form_error('power'); ?></p>
-
-            <span class="form-text text-muted">La batterie :</span> <input type="text" name="batterysize"  id="batterysize"   />
-            <p><?php echo form_error('batterysize'); ?></p>
-
-            <span class="form-text text-muted">La couleur :</span> <input type="text" name="color" id="color"   />
-            <p><?php echo form_error('color'); ?></p>
-
-            <span class="form-text text-muted">Le kilomètrage :</span> <input type="text" name="kilometer" id="kilometer"   />
-            <p><?php echo form_error('kilometer'); ?></p>
-
-            <span class="form-text text-muted">La disponibilité :</span> <input type="text" name="disponibility"  id="disponibility"   />
-            <p><?php echo form_error('disponibility'); ?></p>
-
-            <span class="form-text text-muted">Autopilot:</span> <input type="text" name="autopilot"  id="autopilot"   />
-
-            <p><?php echo form_error('autopilot'); ?></p>
-
-            <span class="form-text text-muted">Le prix :</span> <input type="text" name="dailyprice"  id="dailyprice"   />
-
-            <p><?php echo form_error('dailyprice'); ?></p>
+          <span class="form-text text-muted">Nom :</span> <input type="text" name="name" value="<?= $row['name'] ?>" id="name" class="form-control my-input" />
+            <p><?php echo form_error('name'); ?></p>
+          <span class="form-text text-muted">Prénom: </span><input type="text" name="surname" value="<?= $row['surname'] ?>" id="surname" class="form-control my-input" /> 
+            <p><?php echo form_error('surname'); ?></p>
+          <span class="form-text text-muted">Addresse : </span><input type="text" name="address" value="<?= $row['address'] ?>" id="address" class="form-control my-input" /> 
+            <p><?php echo form_error('address'); ?></p>
+          <span class="form-text text-muted">Date de naissance :</span> <input type="date" name="birthdate" value="<?= $row['birthdate'] ?>" id="birthdate" class="form-control my-input" /> 
+            <p><?php echo form_error('birthdate'); ?></p>
+          <span class="form-text text-muted">Date de permis :</span> <input type="date" name="licensedate" value="<?= $row['license_date'] ?>" id="licensedate" class="form-control my-input" /> 
+            <p><?php echo form_error('licensedate'); ?></p>
+          <span class="form-text text-muted">Addresse mail :</span> <input type="email" name="mail" value="<?= $row['mail'] ?>" id="mail" class="form-control my-input" /> 
+            <p><?php echo form_error('mail'); ?></p>
+          <span class="form-text text-muted">Mot de passe :</span> <input type="password" name="password" value="<?= $row['password'] ?>" id="password" class="form-control my-input" />
+            <p><?php echo form_error('password'); ?></p>
     </div>
+<?php } ?>
 <div class="container d-flex justify-content-center mb-5">
     <button class="btn" name="datasubmit" id="datasubmit" type="submit">sauvegarder</button>
     </form>
 </div>
 
 <footer>
-    <div class="footer-area-bottom" style="height:20%;">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12 col-sm-12 col-xs-12">
-                    <div class="copyright text-center">
-                        <p>
-                            &copy; <strong><a href="legalmentions">Mentions </a></strong> | <strong><a href="#">RENTESLA Ltd. </a></strong> | <strong><a href="#">Contact </a></strong>
-                        </p>
+            <div class="footer-area-bottom" style="height:20%;">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="copyright text-center">
+                                <p>
+                                    &copy; <strong><a href="legalmentions">Mentions </a></strong> | <strong><a href="legalmentions">RENTESLA Ltd. </a></strong> | <strong><a href="#">Contact </a></strong>
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-</footer>
+        </footer>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
