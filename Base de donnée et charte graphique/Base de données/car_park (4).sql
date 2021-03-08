@@ -1,0 +1,12 @@
+insert into car_park (card_number, ccv, card_holder) values ('3558783846562677', 639, 'Maëlle Mitchiner');
+insert into car_park (card_number, ccv, card_holder) values ('3557046949792455', 651, 'Anaëlle Walton');
+insert into car_park (card_number, ccv, card_holder) values ('5610573179067779', 214, 'Bécassine Falkinder');
+insert into car_park (card_number, ccv, card_holder) values ('3572893782761662', 823, 'Bécassine Falkinder');
+insert into car_park (card_number, ccv, card_holder) values ('36926942695689', 151, 'Mà Shambrook');
+insert into car_park (card_number, ccv, card_holder) values ('3586977746017560', 807, 'Mà Shambrook');
+insert into car_park (card_number, ccv, card_holder) values ('4017959732959', 166, 'Anaëlle Walton');
+insert into car_park (card_number, ccv, card_holder) values ('201408908798855', 506, 'Anaëlle Walton');
+insert into car_park (card_number, ccv, card_holder) values ('5002353722757812', 565, 'Maëlle Mitchiner');
+insert into car_park (card_number, ccv, card_holder) values ('3539166020496488', 426, 'Cécile Kubalek');
+insert into car_park (card_number, ccv, card_holder) values ('3555515076202209', 675, 'Uò Sandford');
+insert into car_park (card_number, ccv, card_holder) values ('3539485798658776', 614, 'Maëlle Mitchiner');

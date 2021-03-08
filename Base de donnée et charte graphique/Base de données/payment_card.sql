@@ -1,0 +1,12 @@
+insert into payment_card (card_number, ccv, card_holder, id_user) values ('30197914075922', 626, 'Bécassine Falkinder',4);
+insert into payment_card (card_number, ccv, card_holder, id_user) values ('3570693731934119', 294, 'Maëlle Mitchiner',2);
+insert into payment_card (card_number, ccv, card_holder, id_user) values ('5112000020508986', 590, 'Anaëlle Walton', 6);
+insert into payment_card (card_number, ccv, card_holder, id_user) values ('3538014757325630', 194, 'Cécile Kubalek',3);
+insert into payment_card (card_number, ccv, card_holder, id_user) values ('633468360918143141', 662, 'Uò Sandford',5);
+insert into payment_card (card_number, ccv, card_holder, id_user) values ('3568511096652098', 466, 'Uò Sandford',5);
+insert into payment_card (card_number, ccv, card_holder, id_user) values ('3583557469009425', 483, 'Maëlle Mitchiner',2);
+insert into payment_card (card_number, ccv, card_holder, id_user) values ('3544621205523228', 221, 'Cécile Kubalek',3);
+insert into payment_card (card_number, ccv, card_holder, id_user) values ('4911063882334624', 126, 'Uò Sandford',5);
+insert into payment_card (card_number, ccv, card_holder, id_user) values ('5100136795728922', 930, 'Maëlle Mitchiner',2);
+insert into payment_card (card_number, ccv, card_holder, id_user) values ('3546457861204235', 373, 'Bécassine Falkinder',4);
+insert into payment_card (card_number, ccv, card_holder, id_user) values ('5567751903818799', 351, 'Maëlle Mitchiner',2);
