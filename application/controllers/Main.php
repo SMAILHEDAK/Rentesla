@@ -22,21 +22,45 @@ class Main extends CI_Controller
 	public function index()
 	{
 		$this->load->helper(array('form', 'url'));
-
+		$this->load->helper('url');
 		$this->load->library('form_validation');
-		$this->form_validation->set_rules('name', 'Name', 'required');
-		$this->form_validation->set_rules('password', 'Password', 'required');
-		$this->form_validation->set_rules('surname', 'Surname', 'required');
-		$this->form_validation->set_rules('mail', 'Email', 'required');
-		$this->form_validation->set_rules('birthdate', 'Birthdate', 'required');
-		$this->form_validation->set_rules('licensedate', 'Licensedate', 'required');
-		$this->form_validation->set_rules('login', 'Login', 'required');
-		$this->form_validation->set_rules('address', 'Address', 'required');
+		$this->form_validation->set_rules('name', 'Name', 'required', array('required' => "Le nom doit être renseigné."));
+		$this->form_validation->set_rules('password', 'Password', 'required|min_length[7]', array('required' => "Le mot de passe doit etre renseigné.", 'min_length' => "Le mot de passe doit contenir au moins 7 caractères."));
+		$this->form_validation->set_rules('surname', 'Surname', 'required', array('required' => "Le prénom doit etre renseigné."));
+		$this->form_validation->set_rules('mail', 'Email', 'required|valid_email', array('required' => "L'addresse mail doit etre renseignée."));
+		$this->form_validation->set_rules('birthdate', 'Birthdate', 'required', array('required' => "La date de naissance doit etre renseignée."));
+		$this->form_validation->set_rules('licensedate', 'Licensedate', 'required', array('required' => "La date d'obtention du permis doit etre renseignée."));
+		$this->form_validation->set_rules(
+			'login',
+			'login',
+			'required|is_unique[users.login]',
+			array('required' => "Le pseudo doit etre renseigné.", "is_unique" => "Le pseudo est deja utilisé, veuillez vous connecter.")
+		);
+		$this->form_validation->set_rules('address', 'Address', 'required', array('required' => "L'addresse doit etre renseignée."));
 
 		if ($this->form_validation->run() == FALSE) {
 			$this->load->view('main');
 		} else {
-			$this->load->view('logged_main');
+			//Ici on demande de stocker nos informations post dans un tableau  
+			$this->load->model("main_model");
+			$data = array(
+				"name"     => $this->input->post("name"),
+				"surname"          => $this->input->post("surname"),
+				"birthdate"     => $this->input->post("birthdate"),
+				"password"          => $this->input->post("password"),
+				"mail"          => $this->input->post("mail"),
+				"license_date"          => $this->input->post("licensedate"),
+				"login"          => $this->input->post("login"),
+				"address"          => $this->input->post("address"),
+			);
+			$this->main_model->insert_data($data);
+			$this->session->set_userdata($data);
+			redirect('logged_main');
 		}
+	}
+	
+	public function logout()
+	{
+		session_destroy();
 	}
 }
