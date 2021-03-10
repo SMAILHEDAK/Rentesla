@@ -12,6 +12,9 @@
       {  
            $this->db->insert("users", $data);  
       }  
+    
+
+
 
 
  }  

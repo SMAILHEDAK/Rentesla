@@ -53,4 +53,6 @@ $route['default_controller'] = 'main/index';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 $route['logged_main'] = 'logged_main/logged';
+$route ['login'] ='login/loadlogin';
+$route['logged_admin'] = 'logged_admin/loggedadmin';
 

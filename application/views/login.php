@@ -19,10 +19,10 @@
       <div class="col-md-6 mx-auto text-center">
          <div class="header-title">
             <h1 class="wv-heading--title">
-               S'enregistrer
+               Se connecter
             </h1>
             <h2 class="wv-heading--subtitle">
-               Accedez au futur !
+               Heureux de vous revoir !
             </h2>
          </div>
       </div>
@@ -30,30 +30,6 @@
          <div class="col-md-4 mx-auto">
             <div class="myform form ">
                <form action="" method="post">
-                  <div class="form-group">
-                     <input type="text" name="name" class="form-control my-input" id="name" value="<?= set_value('name'); ?>" placeholder="Nom">
-                  </div>
-                  <p><?php echo form_error('name'); ?></p>
-                  <div class="form-group">
-                     <input type="text" name="surname" class="form-control my-input" id="surname" value="<?= set_value('surname'); ?>" placeholder="Prénom">
-                  </div>
-                  <p><?php echo form_error('surname'); ?></p>
-                  <div class="form-group">
-                     <input type="date" name="birthdate" class="form-control my-input" id="birthdate" value="<?= set_value('birthdate'); ?>" placeholder="Date de naissance">
-                  </div>
-                  <p><?php echo form_error('birthdate'); ?></p>
-                  <div class="form-group">
-                     <input type="date" name="licensedate" class="form-control my-input" id="licensedate" value="<?= set_value('licensedate'); ?>" placeholder="Date d'obtention du permis">
-                  </div>
-                  <p><?php echo form_error('licensedate'); ?></p>
-                  <div class="form-group">
-                     <input type="email" name="mail" class="form-control my-input" id="mail" value="<?= set_value('mail'); ?>" placeholder="Email">
-                  </div>
-                  <p><?php echo form_error('mail'); ?></p>
-                  <div class="form-group">
-                     <input type="text" name="address" id="address" class="form-control my-input" value="<?= set_value('address'); ?>" placeholder="Addresse">
-                  </div>
-                  <p><?php echo form_error('address'); ?></p>
                   <div class="form-group">
                      <input type="text" name="login" id="login" class="form-control my-input" value="<?= set_value('login'); ?>" placeholder="Pseudonyme" size="20" />
                      <p><?php echo form_error('login'); ?></p>
@@ -63,11 +39,8 @@
                   </div>
                   <p><?php echo form_error('password'); ?></p>
                   <div class="text-center ">
-                     <button type="submit" class=" btn btn-block send-button tx-tfm">S'enregistrer!</button>
-                     <a href="<?php echo base_url('login');?>">Se connecter!</a>
+                     <button type="submit" class=" btn btn-block send-button tx-tfm">Se connecter!</button>
                   </div>
-                  <p class="small mt-3">En vous enregistrant, vous vous engagez à respecter les <a href="#" class="ps-hero__content__link">Conditions d'utilisation</a> et <a href="#">les règles de confidentialité</a>.
-                  </p>
                </form>
             </div>
          </div>

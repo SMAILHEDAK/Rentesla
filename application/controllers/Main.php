@@ -21,9 +21,13 @@ class Main extends CI_Controller
 	 */
 	public function index()
 	{
+		
 		$this->load->helper(array('form', 'url'));
 		$this->load->helper('url');
 		$this->load->library('form_validation');
+		if (isset($_SESSION['login'])){
+			redirect('logged_main');
+		}
 		$this->form_validation->set_rules('name', 'Name', 'required', array('required' => "Le nom doit être renseigné."));
 		$this->form_validation->set_rules('password', 'Password', 'required|min_length[7]', array('required' => "Le mot de passe doit etre renseigné.", 'min_length' => "Le mot de passe doit contenir au moins 7 caractères."));
 		$this->form_validation->set_rules('surname', 'Surname', 'required', array('required' => "Le prénom doit etre renseigné."));
@@ -62,5 +66,10 @@ class Main extends CI_Controller
 	public function logout()
 	{
 		session_destroy();
+		redirect(base_url(), 'refresh');
+	}
+
+	public function login(){
+		redirect('login');
 	}
 }
