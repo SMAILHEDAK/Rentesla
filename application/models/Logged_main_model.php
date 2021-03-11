@@ -14,4 +14,8 @@
         return $cars->result_array();
       } 
 
+      function get_autopilot($autopilot){
+          $cars = $this->db->get_where('car_park', array('autopilot' => $autopilot));
+        return $cars->result_array();
+      }
  }  

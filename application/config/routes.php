@@ -55,4 +55,6 @@ $route['translate_uri_dashes'] = FALSE;
 $route['logged_main'] = 'logged_main/logged';
 $route ['login'] ='login/loadlogin';
 $route['logged_admin'] = 'logged_admin/loggedadmin';
+$route ['rent/(:any)'] = 'rent/rent/$id';
+$route ['profile'] ='profile/profile';
 

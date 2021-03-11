@@ -30,7 +30,7 @@
                     Menu
                 </a>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#"><?php echo anchor('logged_main', 'Accéder à votre profil', 'class="link-class"') ?></a>
+                    <a class="dropdown-item" href="#"><?php echo anchor('profile', 'Accéder à votre profil', 'class="link-class"') ?></a>
                     <a class="dropdown-item" href="#">
                         <?php echo anchor('main/logout', 'Se déconnecter', 'class="link-class"') ?></a>
                 </div>
@@ -41,21 +41,22 @@
         <img src="../../img/hero1.jpg" class="img-fluid" alt="Responsive image">
     </header>
     <section class="container">
-        <h1>Rechercher une tesla</h1>
+        <h1>Nos Tesla disponibles :</h1>
         <div class="input-group container d-flex align-items-center">
-            <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <label class="input-group-text" for="inputGroupSelect01">Autopilot</label>
+            <form action="" method="post">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="autopilot">Autopilot</label>
+                    </div>
+                    <select class="custom-select" name="auto">
+                        <option disabled selected>Choisir</option>
+                        <option value="1">Oui</option>
+                        <option value="0">Non</option>
+                    </select>
                 </div>
-                <select class="custom-select" id="inputGroupSelect01">
-                    <option selected>Choisir</option>
-                    <option value="1">Oui</option>
-                    <option value="2">Non</option>
-                </select>
-            </div>
-            <button type="button" class="btn btn-outline-primary">rechercher</button>
+                <button type="submit" name="submit" value="submit" class="btn btn-outline-primary">rechercher</button>
         </div>
+        </form>
     </section>
     <section class="container">
         <?php foreach ($cars as $row) { ?>
@@ -93,8 +94,11 @@
                             <?php if ($row['model'] == 'Roadster') {
                                 echo 'Pour apprécier une virée les cheveux au vent!';
                             } ?>
+                            <br>
+                            <?= $row['kilometer'] ?> kilomètres <br>
+                            <?= $row['color'] ?><br>
                         </p>
-                        <a class="btn btn-primary">Plus d'infos!</a>
+                        <a href="rent/<?= $row['car_id']?>" class="btn btn-primary">Plus d'infos!</a>
                         <p class="text-right"><?= $row['dailyprice'] ?> euros/jour</p>
 
 
