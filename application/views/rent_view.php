@@ -1,6 +1,3 @@
-<?php
-var_dump($cardata['0']['autopilot']);
-?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -102,10 +99,11 @@ var_dump($cardata['0']['autopilot']);
 
     <div class="container d-flex justify-content-center">
         <p class="h5">Louer ce véhicule :</p>
+        <p class="text-danger"><?= $error?></p>
     </div>
 
     <div class="container d-flex justify-content-center">
-        <form>
+        <form action="" method="post">
             <div class="form-group row">
                 <div class="col-8">
                     <div class="input-group">
@@ -134,11 +132,14 @@ var_dump($cardata['0']['autopilot']);
             </div>
             <div class="form-group row">
                 <div class="col-8">
-                    <select id="bank" name="bank" class="custom-select" aria-describedby="bankHelpBlock">
-                        <option value="1">Carte numéro 1</option>
+                    <select name="cards" id="cards">
+                        <?php foreach ($cards as $cards) { ?>
+                            <option value="<?= $cards['card_number'] ?>">Bénéficiaire de la carte :<?= $cards['card_holder'] ?> <br> Numéro de carte : <?= $cards['card_number'] ?></option>
+                        <?php } ?>
                     </select>
                     <span id="bankHelpBlock" class="form-text text-muted">Sélectionnez la carte bancaire à utiliser</span>
                 </div>
+                <p class="text-muted">Si vous n'avez aucune carte d'enregistrée, vous pouvez<?php echo anchor('add_card', 'Ajouter une carte', 'class="btn"') ?>.</p>
             </div>
             <div class="form-group row">
                 <div class="offset-4 col-8">
@@ -147,8 +148,6 @@ var_dump($cardata['0']['autopilot']);
             </div>
         </form>
     </div>
-
-
     <footer class="py-4 bg-dark flex-shrink-0">
         <div class="container text-center">
             <a href="https://bootstrapious.com/snippets" class="text-muted">Bootstrap snippet by Bootstrapious</a>
