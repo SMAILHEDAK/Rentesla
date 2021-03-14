@@ -29,7 +29,7 @@
                     Menu
                 </a>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#"><?php echo anchor('profile', 'Accéder à votre profil', 'class="link-class"') ?></a>
+                <a class="dropdown-item" href="#"><?php if ($_SESSION['admin']=='1'){echo anchor('logged_admin', 'Accéder à votre profil', 'class="link-class"');} else{echo anchor('profile', 'Accéder à votre profil', 'class="link-class"');} ?></a>
                     <a class="dropdown-item" href="#">
                         <?php echo anchor('main/logout', 'Se déconnecter', 'class="link-class"') ?></a>
                 </div>

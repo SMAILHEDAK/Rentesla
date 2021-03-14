@@ -60,5 +60,9 @@ class Profile_model extends CI_Model
         $this->db->where('car_id', $id);
         $this->db->set('end_date', date('Y-m-d'));
         $this->db->update('rental');
+        $this->db->where('car_id', $id);
+        $this->db->set('disponibility', 1);
+        $this->db->update('car_park');
+
     }
 }

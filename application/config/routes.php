@@ -58,8 +58,18 @@ $route['logged_admin'] = 'logged_admin/loggedadmin';
 $route ['rent/(:any)'] = 'rent/rent/$id';
 $route ['profile'] ='profile/profile';
 $route ['add_card'] ='add_card/addcard';
+$route ['successpage'] ='successpage/successpage';
+$route ['errorpage'] ='errorpage/errorpage';
 $route ['profile/cancel/(:any)'] ='profile/cancel_rent/$id';
 $route ['profile/return/(:any)'] ='profile/return_car/$id';
+$route ['logged_admin/deleteuser/(:any)'] ='logged_admin/deleteuser/$id';
+$route ['logged_admin/deletecar/(:any)'] ='logged_admin/deletecar/$id';
+$route ['logged_admin/deleterent/(:any)'] ='logged_admin/deleterent/$id';
+$route ['modifycar/(:any)'] = 'modifycar/modify/$id';
+$route ['addcar'] ='addcar/add';
+
+
+
 
 
 

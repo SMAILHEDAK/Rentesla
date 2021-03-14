@@ -99,54 +99,90 @@
 
     <div class="container d-flex justify-content-center">
         <p class="h5">Louer ce véhicule :</p>
-        <p class="text-danger"><?= $error?></p>
     </div>
 
     <div class="container d-flex justify-content-center">
-        <form action="" method="post">
-            <div class="form-group row">
-                <div class="col-8">
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text">
-                                <i class="fa fa-clock-o"></i>
+        <div class='row'>
+            <div class='col'>
+                <form action="" method="post">
+                    <div class="form-group row">
+                        <div class="col-8">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fa fa-clock-o"></i>
+                                    </div>
+                                </div>
+                                <input id="start_date" name="start_date" placeholder="Date de début" type="date" class="form-control" aria-describedby="start_dateHelpBlock">
                             </div>
+                            <span id="start_dateHelpBlock" class="form-text text-muted">Selectionnez votre date de début</span>
                         </div>
-                        <input id="start_date" name="start_date" placeholder="Date de début" type="date" class="form-control" aria-describedby="start_dateHelpBlock">
                     </div>
-                    <span id="start_dateHelpBlock" class="form-text text-muted">Selectionnez votre date de début</span>
-                </div>
-            </div>
-            <div class="form-group row">
-                <div class="col-8">
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text">
-                                <i class="fa fa-clock-o"></i>
+
+                    <div class="form-group row">
+                        <div class="col-8">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fa fa-clock-o"></i>
+                                    </div>
+                                </div>
+                                <input id="end_date" name="end_date" placeholder="Date de fin" type="date" class="form-control" aria-describedby="end_dateHelpBlock">
                             </div>
+                            <span id="end_dateHelpBlock" class="form-text text-muted">Selectionnez votre date de fin</span>
                         </div>
-                        <input id="end_date" name="end_date" placeholder="Date de fin" type="date" class="form-control" aria-describedby="end_dateHelpBlock">
                     </div>
-                    <span id="end_dateHelpBlock" class="form-text text-muted">Selectionnez votre date de fin</span>
-                </div>
+                    <div class="form-group row">
+                        <div class="col-8">
+                            <select name="cards" id="cards" class="custom-select">
+                                <?php foreach ($cards as $cards) { ?>
+                                    <option value="<?= $cards['id_card'] ?>">Bénéficiaire de la carte :<?= $cards['card_holder'] ?> <br> Numéro de carte : <?= $cards['card_number'] ?></option>
+                                <?php } ?>
+                            </select>
+                            <span id="bankHelpBlock" class="form-text text-muted">Sélectionnez la carte bancaire à utiliser</span>
+                        </div>
+                    </div>
+                    <?php if ($cardata['0']['autopilot'] == 1) {
+                        echo "<div class='form-group row'>
+                    <div class='col-8'><select class='custom-select' name='auto'>
+                        <option disabled selected>Choisir</option>
+                        <option value='1'>Oui</option>
+                        <option value='0'>Non</option>
+                    </select>  <span id='autoHelpBlock' class='form-text text-muted'>Voulez vous vous faire livrer par autopilot ? Une surfacture de 150 euros s'effectuera.</span>
+                    </div>
+                    </div>";
+                    } ?>
+                    <p class="text-muted">Si vous n'avez aucune carte d'enregistrée, vous pouvez<?php echo anchor('add_card', 'Ajouter une carte', 'class="btn"') ?>.</p>
+
+                    <div class="form-group row">
+                        <div class="col-8">
+                            <input name="submit" type="submit" value="Louer le véhicule" class="btn btn-primary"></input>
+                        </div>
+                    </div>
+                </form>
             </div>
-            <div class="form-group row">
-                <div class="col-8">
-                    <select name="cards" id="cards">
-                        <?php foreach ($cards as $cards) { ?>
-                            <option value="<?= $cards['card_number'] ?>">Bénéficiaire de la carte :<?= $cards['card_holder'] ?> <br> Numéro de carte : <?= $cards['card_number'] ?></option>
+            <div class='col-6'>
+                <p class="h3">Dates non disponibles :</p>
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Date de début</th>
+                            <th scope="col">Date de fin</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($rentals as $rentals) { ?>
+                            <tr>
+                                <td><?= $rentals['start_date'] ?></td>
+                                <td><?= $rentals['end_date'] ?></td>
+                            </tr>
                         <?php } ?>
-                    </select>
-                    <span id="bankHelpBlock" class="form-text text-muted">Sélectionnez la carte bancaire à utiliser</span>
-                </div>
-                <p class="text-muted">Si vous n'avez aucune carte d'enregistrée, vous pouvez<?php echo anchor('add_card', 'Ajouter une carte', 'class="btn"') ?>.</p>
+                    </tbody>
+                </table>
+                <?php}?>
             </div>
-            <div class="form-group row">
-                <div class="offset-4 col-8">
-                    <button name="submit" type="submit" class="btn btn-primary">Submit</button>
-                </div>
-            </div>
-        </form>
+        </div>
     </div>
     <footer class="py-4 bg-dark flex-shrink-0">
         <div class="container text-center">

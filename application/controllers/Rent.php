@@ -28,35 +28,41 @@ class Rent extends CI_Controller
 		$data['cardata'] = $this->rent_model->get_car_info();
 		$data['cards'] = $this->rent_model->get_cards();
 		$data['rentals'] = $this->rent_model->get_current_car_rental();
-		$data['error'] = "";
-		foreach ($data['rentals'] as $row) {
-			 {
-				$end_rental_date = strtotime($row['end_date']);
-				$date_end_entered = strtotime($this->input->post('end_date'));
-				$start_rental_date = strtotime($row['start_date']);
-				$date_start_entered = strtotime($this->input->post('start_date'));
-				$today = strtotime('today');
-				if($date_start_entered < $today or $date_end_entered < $today){
-					$data['error'] = "La location ne peux pas se faire avant la date d'aujourd'hui";
+		$to_date = date("Y-m-d", strtotime($this->input->post('end_date')));
+		$from_date = date("Y-m-d", strtotime($this->input->post('start_date')));
+		$car_id = intval($_SESSION['car_id']);
+		$this->load->view('rent_view', $data);
+		if ($this->input->post('submit')) {
+			$result = $this->rent_model->check($from_date, $to_date, $car_id);
+			if (empty($result)) {
+				if($this->input->post('cards')){
+				$this->registerrent();
 				}
-				else if($date_start_entered<= $end_rental_date && $date_start_entered>=$start_rental_date){
-					$data['error'] = "La véhicule n'est pas disponible pour ces dates";
+				else {
+					redirect('errorpage','refresh');
 				}
-				else if($date_end_entered>=$start_rental_date && $date_end_entered<=$end_rental_date){
-					$data['error'] = "La véhicule n'est pas disponible pour ces dates";
-				}
-				else if($date_end_entered <= $end_rental_date){
-					$data['error'] = "La véhicule n'est pas disponible pour ces dates";
-				}
-				else if ($date_end_entered < $date_start_entered){
-					$data['error'] = "La date de fin est inférieure à la date de début. Cela fait aucun sens.";
-				}
-				else{
-					echo 'blablabla';
-					// METTRE LE CODE POUR INSÉRER LES DONNÉES et redirect vers page confirmation
-				}
+			} 
+			else if (!empty($result)) {
+				redirect('errorpage','refresh');
 			}
 		}
-		$this->load->view('rent_view',$data);
+	}
+
+
+	public function registerrent()
+	{
+		$this->load->helper(array('form', 'url'));
+		$this->load->library('form_validation');
+		$this->load->model('rent_model');
+		$rentdata = array(
+			"start_date"     => $this->input->post("start_date"),
+			"end_date"          => $this->input->post("end_date"),
+			"id_user"     => $_SESSION['id'],
+			"car_id"          => $_SESSION['car_id'],
+			"id_card"          => $this->input->post("cards"),
+		);
+		$this->rent_model->rent($rentdata);
+		redirect('successpage','refresh');
+
 	}
 }
