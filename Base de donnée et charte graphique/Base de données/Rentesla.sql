@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost
--- Généré le : ven. 05 mars 2021 à 16:07
+-- Généré le : mar. 23 mars 2021 à 15:13
 -- Version du serveur :  10.4.17-MariaDB
 -- Version de PHP : 8.0.2
 
@@ -61,8 +61,7 @@ INSERT INTO `car_park` (`car_id`, `model`, `batterysize`, `power`, `color`, `kil
 (15, 'Model Y', '75kwh', '450kw', 'Bleu', 66186, 0, 1, 116),
 (16, 'Model 3', '90kwh', '450kw', 'Rouge', 22298, 0, 0, 145),
 (17, 'Model 3', '61kwh', '310kw', 'Rouge', 40942, 1, 0, 147),
-(18, 'Model Y', '61kwh', '235kw', 'Noir', 58400, 1, 1, 99),
-(19, 'Roadster', '75kwh', '310kw', 'Rouge', 53582, 0, 1, 120),
+(19, 'Roadster', '75kwh', '310kw', 'Rouge', 53582, 1, 1, 120),
 (20, 'Roadster', '61kwh', '235kw', 'Bleu', 53244, 1, 0, 146),
 (21, 'Model Y', '90kwh', '450kw', 'Noir', 112270, 1, 1, 89),
 (22, 'Model S', '90kwh', '310kw', 'Gris', 51287, 0, 0, 130),
@@ -105,7 +104,6 @@ INSERT INTO `car_park` (`car_id`, `model`, `batterysize`, `power`, `color`, `kil
 (59, 'Model Y', '90kwh', '450kw', 'Noir', 70635, 1, 0, 135),
 (60, 'Model Y', '75kwh', '235kw', 'Noir', 23155, 0, 1, 91),
 (61, 'Model S', '90kwh', '246kw', 'Blanc', 25117, 1, 0, 142),
-(62, 'Model X', '61kwh', '310kw', 'Rouge', 56187, 0, 1, 84),
 (63, 'Roadster', '61kwh', '235kw', 'Blanc', 99855, 0, 0, 88),
 (64, 'Model S', '90kwh', '310kw', 'Gris', 35325, 1, 0, 91),
 (65, 'Model Y', '75kwh', '246kw', 'Blanc', 70209, 1, 1, 139),
@@ -175,7 +173,11 @@ INSERT INTO `payment_card` (`id_card`, `card_number`, `card_holder`, `ccv`, `id_
 (19, 4911063882334624, 'Uò Sandford', 126, 5),
 (20, 5100136795728922, 'Maëlle Mitchiner', 930, 2),
 (21, 3546457861204235, 'Bécassine Falkinder', 373, 4),
-(22, 5567751903818799, 'Maëlle Mitchiner', 351, 2);
+(22, 5567751903818799, 'Maëlle Mitchiner', 351, 2),
+(25, 23459809877, 'Carlos Tavares', 234, 3),
+(27, 4567089607, 'Michael Youn', 666, 3),
+(28, 45609876534, 'Munster Munch', 456, 1),
+(29, 0, '<h1>Ok</h1>', 111, 1);
 
 -- --------------------------------------------------------
 
@@ -188,34 +190,33 @@ CREATE TABLE `rental` (
   `start_date` date NOT NULL,
   `end_date` date NOT NULL,
   `id_user` int(11) NOT NULL,
-  `car_id` int(11) NOT NULL
+  `car_id` int(11) NOT NULL,
+  `id_card` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Déchargement des données de la table `rental`
 --
 
-INSERT INTO `rental` (`id_rental`, `start_date`, `end_date`, `id_user`, `car_id`) VALUES
-(1, '2020-03-18', '2022-02-15', 2, 1),
-(2, '2021-01-14', '2022-04-29', 3, 2),
-(3, '2020-08-01', '2022-05-05', 2, 3),
-(4, '2020-09-23', '2022-01-14', 3, 4),
-(5, '2021-01-30', '2021-08-10', 3, 7),
-(6, '2020-06-30', '2022-08-16', 5, 10),
-(7, '2020-11-02', '2022-01-30', 2, 12),
-(8, '2020-05-03', '2022-06-04', 5, 15),
-(9, '2021-01-29', '2022-09-17', 4, 16),
-(10, '2020-12-29', '2021-10-30', 1, 19),
-(11, '2020-10-31', '2022-04-27', 3, 22),
-(12, '2020-04-18', '2022-02-14', 1, 23),
-(13, '2020-09-02', '2021-10-05', 4, 24),
-(14, '2020-07-14', '2022-03-31', 3, 25),
-(15, '2020-04-05', '2021-12-18', 3, 26),
-(16, '2021-01-01', '2022-04-05', 1, 27),
-(17, '2020-06-08', '2022-10-10', 5, 30),
-(18, '2020-08-10', '2022-03-24', 1, 33),
-(19, '2021-01-06', '2022-01-25', 1, 35),
-(20, '2020-03-09', '2021-05-26', 5, 36);
+INSERT INTO `rental` (`id_rental`, `start_date`, `end_date`, `id_user`, `car_id`, `id_card`) VALUES
+(1, '2020-03-18', '2022-02-15', 2, 1, 12),
+(2, '2021-01-14', '2022-04-29', 3, 2, 21),
+(3, '2020-08-01', '2022-05-05', 2, 3, 11),
+(4, '2020-09-23', '2021-03-12', 3, 4, 16),
+(6, '2020-06-30', '2022-08-16', 5, 6, 13),
+(7, '2020-11-02', '2022-01-30', 2, 12, 18),
+(8, '2020-05-03', '2022-06-04', 5, 10, 25),
+(11, '2020-10-31', '2022-04-27', 3, 22, 11),
+(12, '2020-04-18', '2022-02-14', 1, 23, 16),
+(13, '2020-09-02', '2021-10-05', 4, 24, 12),
+(14, '2020-07-14', '2021-03-12', 3, 25, 20),
+(16, '2021-01-01', '2022-04-05', 1, 27, 16),
+(17, '2020-06-08', '2022-10-10', 5, 30, 17),
+(18, '2020-08-10', '2022-03-24', 1, 33, 25),
+(19, '2021-01-06', '2022-01-25', 1, 35, 12),
+(20, '2020-03-09', '2021-05-26', 5, 36, 11),
+(64, '2021-03-13', '2021-03-16', 1, 13, 28),
+(67, '2021-03-31', '2021-03-16', 1, 5, 28);
 
 -- --------------------------------------------------------
 
@@ -241,12 +242,21 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id_user`, `name`, `surname`, `address`, `birthdate`, `license_date`, `mail`, `login`, `password`, `admin`) VALUES
-(1, 'Mà', 'Shambrook', '11 Forster Alley', '1991-08-29', '2001-12-20', 'mshambrook0@miibeian.gov.cn', 'tshambrook0', 'TCjBWTpN', 0),
+(1, 'Màelle', 'Shambrook', '11 Forster Alley', '1991-08-29', '2001-12-20', 'mshambrook0@miibeian.gov.cn', 'tshambrook0', 'TCjBWTpN', 0),
 (2, 'Maëlle', 'Mitchiner', '46452 Heath Hill', '1975-08-05', '2011-03-09', 'cmitchiner1@cbc.ca', 'rmitchiner1', 'fgm9i4TKd7', 0),
 (3, 'Cécile', 'Kubalek', '316 Browning Trail', '1993-06-21', '2005-03-18', 'wkubalek2@cbc.ca', 'kkubalek2', '9hDlkhR', 0),
 (4, 'Bécassine', 'Falkinder', '27 Miller Crossing', '1975-03-20', '1996-01-04', 'pfalkinder3@t-online.de', 'rfalkinder3', 'J4FGyv', 0),
 (5, 'Uò', 'Sandford', '912 Fulton Road', '1977-07-10', '2004-12-12', 'hsandford4@360.cn', 'msandford4', 'R3Bh9njSrumg', 0),
-(6, 'Anaëlle', 'Walton', '5 Chive Crossing', '1980-07-16', '1998-08-21', 'rwalton0@oracle.com', 'kwalton0', 'rPXUoRHA06', 1);
+(6, 'Anaëlle', 'Walton', '5 Chive Crossing', '1980-07-16', '1998-08-21', 'rwalton0@oracle.com', 'kwalton0', 'rPXUoRHA06', 1),
+(7, 'Apu', 'Naha', 'Kwikemart, Springfield, USA', '1975-05-23', '1993-02-24', 'apuandmanjula@springfield.com', 'APU', 'Manjulapotzato', 0),
+(12, 'Kili', 'Manjaroo', 'Funhouse, hourglass, california', '1980-12-05', '2000-03-27', 'Manju@kolp.com', 'Kilitech', 'Almondmilkyummy', 0),
+(13, 'Apu', 'APUUZ', 'Rue du champ', '2021-03-06', '2021-03-06', 'mol@pol.com', 'Indianunicorn', 'KOLPmpozl&é\"', 0),
+(16, 'Flo', 'Flodo', 'nulle part', '2021-03-22', '2021-03-12', 'flor@flor.com', 'julE', '1234567', 0),
+(17, 'Flo', 'Flodo', 'nulle part', '2021-03-22', '2021-03-12', 'flor@flor.com', 'Floflor', 'fdfdfdpihfdpihfdpih', 0),
+(20, 'Hello', 'Iamme', 'FGTGf', '2021-03-09', '2021-03-09', 'hello@otma.co', 'RET', 'uaremelolpolice', 0),
+(21, 'Niko', 'Nikola', 'ght', '2021-03-05', '2021-03-05', 'Jul@jul.com', 'dsds', '1223242424', 0),
+(22, 'Frank', 'While', '34, wall street, NY', '1987-12-22', '2006-06-12', 'Whiledo@break.com', 'Teslapower', 'Teslapower123456', 0),
+(23, 'Elon', 'Musk', 'Elon street, street', '1998-04-12', '2016-05-23', 'elonmusk@gmail.com', 'El0n', 'Hellofuturelol', 0);
 
 --
 -- Index pour les tables déchargées
@@ -271,7 +281,8 @@ ALTER TABLE `payment_card`
 ALTER TABLE `rental`
   ADD PRIMARY KEY (`id_rental`),
   ADD KEY `rental_users_FK` (`id_user`),
-  ADD KEY `rental_car_park0_FK` (`car_id`);
+  ADD KEY `rental_car_park0_FK` (`car_id`),
+  ADD KEY `rental_payment_card_fk` (`id_card`) USING BTREE;
 
 --
 -- Index pour la table `users`
@@ -287,25 +298,25 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT pour la table `car_park`
 --
 ALTER TABLE `car_park`
-  MODIFY `car_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
+  MODIFY `car_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
 
 --
 -- AUTO_INCREMENT pour la table `payment_card`
 --
 ALTER TABLE `payment_card`
-  MODIFY `id_card` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id_card` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT pour la table `rental`
 --
 ALTER TABLE `rental`
-  MODIFY `id_rental` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id_rental` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
 
 --
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- Contraintes pour les tables déchargées
@@ -322,6 +333,7 @@ ALTER TABLE `payment_card`
 --
 ALTER TABLE `rental`
   ADD CONSTRAINT `rental_car_park0_FK` FOREIGN KEY (`car_id`) REFERENCES `car_park` (`car_id`),
+  ADD CONSTRAINT `rental_payment_card_fk` FOREIGN KEY (`id_card`) REFERENCES `payment_card` (`id_card`),
   ADD CONSTRAINT `rental_users_FK` FOREIGN KEY (`id_user`) REFERENCES `users` (`id_user`);
 COMMIT;
 
